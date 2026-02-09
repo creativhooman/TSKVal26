@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite! 💌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffafbd, #ffc3a0, #a2c2e1);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Animated Background Elements */
+        .decor {
+            position: absolute; pointer-events: none; z-index: 0;
+            animation: drift 10s linear infinite;
+            opacity: 0.6; font-size: 24px;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Screens */
+        .screen {
+            display: none; flex-direction: column; align-items: center;
+            animation: fadeIn 0.8s ease-out; padding: 20px; z-index: 10;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        /* Fancy Letter Icon */
+        .fancy-letter {
+            font-size: 80px; cursor: pointer;
+            transition: transform 0.3s;
+            animation: wiggle 2s infinite;
+            background: white; border-radius: 20px;
+            padding: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .fancy-letter:active { transform: scale(0.9); }
+        @keyframes wiggle { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+        /* UI Elements */
+        .big-gif { width: 220px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        
+        #main-card {
+            background: white; padding: 20px; border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); width: 320px; border: 8px solid #fff;
+        }
+
+        .postcard-img { width: 100%; border-radius: 15px; }
+        .invite-text { font-size: 0.85rem; color: #444; line-height: 1.5; margin: 15px 0; text-align: left; }
+        .question { font-family: 'Press Start 2P', cursive; font-size: 0.7rem; color: #d14d72; margin-bottom: 15px; }
+
+        /* Floating Buttons */
+        .btn-container { display: flex; justify-content: space-around; align-items: center; height: 100px; position: relative; width: 100%; }
+        
+        #yesBtn {
+            background: #ff4d6d; color: white; border: none; width: 85px; height: 85px;
+            border-radius: 50%; font-weight: bold; cursor: pointer;
+            box-shadow: 0 8px 15px rgba(255, 77, 109, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        #noBtn {
+            background: #adb5bd; color: white; border: none; min-width: 70px;
+            padding: 12px; border-radius: 25px; cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .balloon-link {
+            background: #ff4d6d; color: white; text-decoration: none; padding: 20px;
+            border-radius: 50% 50% 50% 10%; font-weight: bold; display: inline-block;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+            animation: float 3s ease-in-out infinite; margin: 20px; border: 3px solid white;
+        }
+
+        .done-btn { background: #4caf50; color: white; border: none; padding: 12px 20px; border-radius: 15px; font-weight: bold; cursor: pointer; }
+        .back-btn { margin-top: 20px; background: rgba(255,255,255,0.8); color: #d14d72; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <div id="bg-decor"></div>
+
+    <div id="intro-screen" class="screen" style="display: flex;">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUydHJtbm9xazZrdDJmaWFkMDRieTc2NGdwZzQ3azNvbjZ3bjQ4ZG1sayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RRVkrpIxM0odq/giphy.gif" class="big-gif">
+        <div class="fancy-letter" onclick="showGuiltScreen()">💌</div>
+        <h2 style="color: white; text-shadow: 1px 1px #d14d72;">Bestie, you have a message!<br>(Tap the icon to open)</h2>
+    </div>
+
+    <div id="guilt-screen" class="screen">
+        <h2 style="color: white; text-shadow: 1px 1px #d14d72;">Buksan mo na ang letter...<br>Di ka namin pipilitin... pero pls. 🥺</h2>
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyYnljYTk1cWQxZjYzcmZpd2FyNDNiajdtZmt3YmZyZXlvNGZnbHpoYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/901mxGLGQN2PyCQpoc/giphy.gif" class="big-gif">
+        <button class="done-btn" style="background: white; color: #d14d72;" onclick="openLetter()">This Way 🚪</button>
+    </div>
+
+    <div id="main-card" class="screen">
+        <img src="IMG_7180.jpeg" class="postcard-img">
+        <div class="invite-text">
+            Hi bestie! 💌<br><br>
+            Free ka ba this Sunday, Feb 15? If may extra time and konting puso ka to share, we’d love to have you. 💚<br><br>
+            If willing kang maglingkod at makisama sa learners, sign up as a volunteer. Super dali lang! 🌱<br><br>
+            Let’s share love in a way that truly matters. Love is better when shared. 🥹
+        </div>
+        <div class="question">TARA SA KOMYU?</div>
+        <div class="btn-container">
+            <button id="yesBtn">YES!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div id="yes-screen" class="screen">
+        <img src="IMG_7181.jpeg" style="width: 250px; border-radius: 20px; border: 5px solid white;">
+        <h3 style="color: white; text-shadow: 1px 1px #d14d72;">Yay! Share your heart here:</h3>
+        <a href="https://forms.gle/kRLkhZ7CeahB9M8c8" target="_blank" class="balloon-link">🎈 SIGN UP!</a>
+        <button class="done-btn" onclick="showFinalSalamat()">Tap when done! ✅</button>
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="final-salamat" class="screen">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyaTc5ZXZ3ejJtc3gzZWZ2OHloNHR4OXg2enhybDFieWswZzFwdWltYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Um3ljJl8jrnHy/giphy.gif" style="width: 250px; animation: wiggle 3s infinite;">
+        <h1 style="color: white; text-shadow: 2px 2px #d14d72;">Salamat po at kitakits! 🙂</h1>
+        <button class="back-btn" onclick="goBack()">Start Over</button>
+    </div>
+
+    <div id="no-screen" class="screen">
+        <img src="IMG_7182.jpeg" style="width: 250px; border-radius: 20px; border: 5px solid white;">
+        <h3 style="color: white; text-shadow: 1px 1px #d14d72;">No worries, bestie. Your time will come, see you soon 💌</h3>
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyN2pjbTlwZXc1OTFpMGtianA0YjY4MzkxOXY5Y2V6b2NuMTdiNzZ5cSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/50dsL7TuCbvAVoDoOy/giphy.gif" style="width: 150px; border-radius: 15px;">
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        // Generate Background Decorations
+        const decorIcons = ['🌿', '🌸', '🧱', '🍀', '🌼', '🧱'];
+        const decorContainer = document.getElementById('bg-decor');
+        for (let i = 0; i < 20; i++) {
+            const span = document.createElement('span');
+            span.className = 'decor';
+            span.innerText = decorIcons[Math.floor(Math.random() * decorIcons.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.animationDelay = Math.random() * 10 + 's';
+            span.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            decorContainer.appendChild(span);
+        }
+
+        function hideAll() { document.querySelectorAll('.screen').forEach(s => s.style.display = 'none'); }
+        function showGuiltScreen() { hideAll(); document.getElementById('guilt-screen').style.display = 'flex'; }
+        function openLetter() { hideAll(); document.getElementById('main-card').style.display = 'flex'; }
+        function showFinalSalamat() { hideAll(); document.getElementById('final-salamat').style.display = 'flex'; }
+        function goBack() { location.reload(); }
+
+        const noBtn = document.getElementById('noBtn');
+        let noClickCount = 0;
+        const noTexts = ["No", "Sure?", "Sure na?", "Legit?", "Final Answer?", "Owkie!"];
+        const colors = ['#adb5bd', '#ff9f43', '#feca57', '#5f27cd', '#ff6b6b', '#48dbfb'];
+
+        noBtn.onclick = () => {
+            if (noClickCount < noTexts.length - 1) {
+                noClickCount++;
+                noBtn.innerText = noTexts[noClickCount];
+                noBtn.style.backgroundColor = colors[noClickCount % colors.length];
+                
+                const x = Math.random() * (window.innerWidth - 120);
+                const y = Math.random() * (window.innerHeight - 120);
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+            } else {
+                hideAll();
+                document.getElementById('no-screen').style.display = 'flex';
+            }
+        };
+
+        document.getElementById('yesBtn').onclick = () => {
+            hideAll();
+            document.getElementById('yes-screen').style.display = 'flex';
+        };
+
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); noBtn.click(); });
+    </script>
+</body>
+</html>
