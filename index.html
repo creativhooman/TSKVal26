@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite! 💌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #a2c2e1);
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 100;
+            animation: floatUp 4s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Intro Screen */
+        #intro-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        @keyframes zoomIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+        .intro-gif {
+            width: 180px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+        
+        .envelope { font-size: 80px; animation: heartbeat 1.5s infinite; }
+        @keyframes heartbeat { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.1); } 
+        }
+
+        /* Main Card */
+        #main-card {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            width: 320px;
+            border: 8px solid #fff;
+            z-index: 10;
+        }
+
+        .postcard-img { width: 100%; border-radius: 10px; }
+        
+        .invite-text {
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.5;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .question {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.75rem;
+            color: #d14d72;
+            margin-bottom: 20px;
+        }
+
+        /* Fixed Button Layout */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            margin-top: 20px;
+            height: 100px;
+            position: relative;
+        }
+
+        #yesBtn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            width: 85px;
+            height: 85px;
+            font-size: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #noBtn {
+            background: #adb5bd;
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            font-size: 0.7rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 15;
+            transition: 0.1s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Results */
+        .result-screen { display: none; padding: 20px; z-index: 20; }
+        .result-img { width: 280px; border-radius: 20px; border: 8px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .msg { color: white; text-shadow: 2px 2px #d14d72; font-size: 1.1rem; margin-top: 20px; font-weight: bold; }
+        .back-btn { margin-top: 20px; background: white; color: #d14d72; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+    <div id="particle-box"></div>
+
+    <div id="intro-screen" onclick="openLetter()">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUydHJtbm9xazZrdDJmaWFkMDRieTc2NGdwZzQ3azNvbjZ3bjQ4ZG1sayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RRVkrpIxM0odq/giphy.gif" alt="Cute Bears" class="intro-gif">
+        <div class="envelope">💌</div>
+        <h2 style="color: white; text-shadow: 1px 1px #d14d72;">Bestie, you have a message!<br>(Tap to open)</h2>
+    </div>
+
+    <div id="main-card">
+        <img src="IMG_7180.jpeg" class="postcard-img">
+        <div class="invite-text">
+            Hi, bestie! 💌<br><br>
+            Free ka ba this Sunday, Feb 15? Instead of flowers, how about giving your time and heart to the community? <br><br>
+            If willing kang maglingkod at makisama sa learners, sign up as a volunteer—super dali lang! Let's turn love into action this Valentine's. Love is better when shared.
+        </div>
+        <div class="question">TARA SA KOMYU?</div>
+        
+        <div class="btn-container">
+            <button id="yesBtn">YES!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div id="yes-screen" class="result-screen">
+        <img src="IMG_7181.jpeg" class="result-img">
+        <div class="msg">Yay! See you! 🌻✨</div>
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="no-screen" class="result-screen">
+        <img src="IMG_7182.jpeg" class="result-img">
+        <div class="msg">Siguro we understand, but hopefully, you could consider visiting us soon. 🥺👉👈</div>
+        <button class="back-btn" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        const intro = document.getElementById('intro-screen');
+        const mainCard = document.getElementById('main-card');
+        const yesScreen = document.getElementById('yes-screen');
+        const noScreen = document.getElementById('no-screen');
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+
+        let noClickCount = 0;
+
+        function openLetter() {
+            intro.style.display = 'none';
+            mainCard.style.display = 'block';
+        }
+
+        function createParticles(emoji) {
+            for (let i = 0; i < 15; i++) {
+                const p = document.createElement('div');
+                p.className = 'sparkle';
+                p.innerText = emoji;
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '100vh';
+                p.style.fontSize = '28px';
+                p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 4000);
+            }
+        }
+
+        yesBtn.onclick = () => {
+            mainCard.style.display = 'none';
+            yesScreen.style.display = 'block';
+            createParticles('🦋');
+        };
+
+        noBtn.onclick = () => {
+            noClickCount++;
+            if (noClickCount === 1) {
+                alert("Sure ka na ba?");
+                noBtn.innerText = "Sure na?";
+            } else if (noClickCount === 2) {
+                alert("Final Answer?");
+                noBtn.innerText = "Final Answer?";
+            } else {
+                mainCard.style.display = 'none';
+                noScreen.style.display = 'block';
+                createParticles('🫧');
+            }
+        };
+
+        const moveNo = () => {
+            if (noClickCount >= 1) {
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 100);
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+            }
+        };
+
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNo();
+            if (noClickCount === 0) noBtn.click(); 
+        });
+        noBtn.addEventListener('mouseover', moveNo);
+
+        function goBack() {
+            location.reload(); 
+        }
+    </script>
+</body>
+</html>
