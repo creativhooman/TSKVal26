@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tara sa Komyu?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 50%, #a2c2e1 100%);
+            font-family: 'Fredoka', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        .floating-element {
+            position: absolute;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 85%;
+            width: 350px;
+            border: 8px solid #fff;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-photo {
+            width: 100%;
+            border-radius: 15px;
+            border: 3px solid #fce4ec;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.85rem;
+            color: #d14d72;
+            margin: 20px 0;
+            line-height: 1.6;
+            text-shadow: 2px 2px #fff;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 120px;
+            position: relative;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #c9184a;
+            z-index: 20;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            border-radius: 8px;
+            position: absolute;
+            cursor: pointer;
+            z-index: 15;
+        }
+
+        .result-screen {
+            display: none;
+            padding: 20px;
+            max-width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .result-photo {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .message {
+            color: #fff;
+            text-shadow: 2px 2px #d14d72;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: white;
+            color: #ff4d6d;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-container"></div>
+
+    <div id="setup">
+        <div class="card">
+            <img src="IMG_7180.jpeg" alt="Tara" class="main-photo">
+            <h1>TARA SA KOMYU?</h1>
+            <div class="buttons">
+                <button id="yesBtn">YES</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="yes-screen" class="result-screen">
+        <img src="IMG_7181.jpeg" class="result-photo">
+        <div class="message">Yay! See you! 🌻✨</div>
+    </div>
+
+    <div id="no-screen" class="result-screen">
+        <img src="IMG_7182.jpeg" class="result-photo">
+        <div class="message">
+            Siguro we understand, but hopefully, you could consider visiting us soon. 🥺👉👈
+        </div>
+        <button class="back-btn" onclick="goBack()">Change your mind?</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const setup = document.getElementById('setup');
+        const yesScreen = document.getElementById('yes-screen');
+        const noScreen = document.getElementById('no-screen');
+        const particlesContainer = document.getElementById('particles-container');
+
+        const items = ['✨', '🌸', '🌻', '🫧', '✨', '🫧', '🌷'];
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'floating-element';
+            particle.innerText = items[Math.floor(Math.random() * items.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            const duration = (Math.random() * 3 + 4);
+            particle.style.animationDuration = duration + 's';
+            particlesContainer.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, duration * 1000);
+        }
+
+        setInterval(createParticle, 400);
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', moveNoButton); // For mobile touch
+
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        yesBtn.addEventListener('click', () => {
+            setup.style.display = 'none';
+            yesScreen.style.display = 'block';
+        });
+
+        noBtn.addEventListener('click', () => {
+            setup.style.display = 'none';
+            noScreen.style.display = 'block';
+        });
+
+        function goBack() {
+            noScreen.style.display = 'none';
+            setup.style.display = 'block';
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = '';
+            noBtn.style.top = '';
+        }
+    </script>
+</body>
+</html>
