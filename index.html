@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Invite! 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Courier+Prime:ital,wght@0,400;1,700&family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-intro: linear-gradient(135deg, #e8f5e9, #c8e6c9); 
+            --bg-pond: linear-gradient(180deg, #b3e5fc, #81d4fa); 
+            --bg-letter: linear-gradient(135deg, #f5f5f5, #e0e0e0); 
+        }
+
+        body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            font-family: 'Fredoka', sans-serif;
+            overflow: hidden;
+            transition: background 1.2s ease;
+        }
+
+        .decor {
+            position: absolute; pointer-events: none; z-index: 0;
+            animation: floatRandom 20s linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes floatRandom {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(5vw, 10vh) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .screen {
+            display: none; flex-direction: column; align-items: center;
+            justify-content: center; width: 100%; z-index: 10;
+            animation: fadeIn 0.8s ease-out;
+            max-height: 100vh;
+            text-align: center;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h2 {
+            font-family: 'Arvo', serif;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            padding: 0 20px;
+            color: #2e7d32;
+        }
+
+        /* Maliit na font para sa final screens */
+        .small-h2 {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .tap-hint {
+            font-size: 0.85rem;
+            color: #2e7d32;
+            margin-top: 5px;
+        }
+
+        .letter-container { 
+            position: relative; 
+            cursor: pointer; 
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .fancy-letter { font-size: 80px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
+        .fern-lock { position: absolute; top: 0; right: -5px; font-size: 30px; animation: sway 3s infinite; }
+        
+        @keyframes sway { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(15deg); } }
+
+        .postcard {
+            background: #ffffff;
+            width: 92vw; max-width: 480px;
+            padding: 15px; border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #ccc;
+        }
+
+        .postcard-photo {
+            width: 100%; height: 140px;
+            object-fit: cover;
+            border-radius: 2px; margin-bottom: 10px;
+            filter: contrast(1.1) sepia(0.1);
+        }
+
+        .invite-text {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.82rem;
+            color: #111;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .outside-btns { margin-top: 15px; display: flex; gap: 30px; align-items: center; }
+        
+        #yesBtn {
+            background: #2e7d32; color: white; border: none;
+            width: 90px; height: 65px; 
+            border-radius: 50% 10% 50% 10%; 
+            font-weight: bold; cursor: pointer;
+        }
+
+        #noBtn {
+            background: #81c784; color: white; border: none;
+            width: 65px; height: 45px;
+            border-radius: 10% 50% 10% 50%;
+            cursor: pointer; font-size: 0.75rem; font-weight: bold;
+        }
+
+        .big-gif { 
+            width: 220px;
+            max-width: 80%;
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .door-icon { font-size: 50px; cursor: pointer; }
+        .pond-content { padding: 20px; border-radius: 50%; border: 2px solid white; background: rgba(255,255,255,0.2); margin-top: 15px; }
+
+    </style>
+</head>
+<body style="background: var(--bg-intro);">
+
+    <div id="decor-layer"></div>
+
+    <div id="intro-screen" class="screen" style="display: flex;">
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUydjQ5NmJiaHRhaTZkaWQ1YWFtY3poNGZpZDJndjVxa2UwbzR3ZXy4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/PgdWZV8Bb1fFqVcmtk/giphy.gif" class="big-gif">
+        
+        <div class="letter-container" onclick="showGuiltScreen()">
+            <div class="fancy-letter">✉️</div>
+            <div class="fern-lock">🌿</div>
+        </div>
+        
+        <h2>Bestie, may maliit na liham para sa’yo.</h2>
+        <div class="tap-hint">[Tap to open.]</div>
+    </div>
+
+    <div id="guilt-screen" class="screen">
+        <h2> LOOK WHO’S HERE! 🥹🤚🏼 <br> Knock, knock… tap the door na! ✨</h2>
+        
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyejloanlvb2sxY2RmZGRtcGRka2FkMGk4eXVqOGx1YmYzbjY1em94MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q66ZEIpjEQddUOOKGW/giphy.gif" class="big-gif">
+        
+        <div class="pond-content" onclick="openLetter()">
+            <div class="door-icon">🚪</div>
+            <span style="color: #0277bd; font-weight: bold; font-size: 0.9rem;">This Way</span>
+        </div>
+    </div>
+
+    <div id="main-card" class="screen">
+        <div class="postcard">
+            <img src="IMG_7180.jpeg" class="postcard-photo">
+            <div class="invite-text">
+                <strong>HI BESTIE! KAMUSTA? 💌</strong><br><br>
+                Sa Liwanag at Dunong, we believe learning becomes brighter when shared. Small acts can light up a whole community.<br><br>
+                Free ka ba this Sunday, Feb 15? If may extra time and konting puso ka to share, we’d love to have you. 💚<br><br>
+                Willing maglingkod? Sign up as a volunteer. Dali lang!<br><br>
+                 Mas masaya kapag sama-sama. Let’s turn this ordinary Sunday into something extraordinary. Samahan mo kami this Sunday?🌱
+            </div>
+        </div>
+        <div class="outside-btns">
+            <button id="yesBtn">YES!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <div id="yes-screen" class="screen">
+        <img src="IMG_7181.jpeg" style="width: 200px; border-radius: 15px; border: 3px solid #2e7d32;">
+        
+        <h2 class="small-h2"> Salamat sa YES mo, bestie! <br> See you! 😄</h2>
+
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybWFhbHJ2M2NxemhobmZpMmluaWFiN3QzbXQzbnB4bmNtOTI1czBuNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/12PIT4DOj6Tgek/giphy.gif" style="width: 140px; border-radius: 10px; margin-bottom: 15px;">
+        
+        <a href="https://forms.gle/kRLkhZ7CeahB9M8c8" target="_blank" style="background: #2e7d32; color: white; text-decoration: none; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; margin-bottom: 10px;">🌿 SIGN UP HERE!</a>
+        <button style="background: #1b5e20; color: white; border: none; padding: 10px 20px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 0.7rem;" onclick="showFinalSalamat()">Tap when done! ✅</button>
+        <button onclick="goBack()" style="background:none; border:none; color:#2e7d32; margin-top:10px; font-size:0.75rem;">Back</button>
+    </div>
+
+    <div id="final-salamat" class="screen">
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyaTc5ZXZ3ejJtc3gzZWZ2OHloNHR4OXg2enhybDFieWswZzFwdWltYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Um3ljJl8jrnHy/giphy.gif" style="width: 220px;">
+        <h1 style="color: #1b5e20; font-family: 'Arvo'; font-size: 1.2rem; margin-top: 20px;">Salamat po at kitakits! 🙂</h1>
+        <button onclick="goBack()" style="background:white; border:none; padding:10px 20px; border-radius:25px; margin-top:20px; font-weight:bold; color:#2e7d32; cursor:pointer;">Start Over</button>
+    </div>
+
+    <div id="no-screen" class="screen">
+        <img src="IMG_7182.jpeg" style="width: 200px; border-radius: 15px; border: 3px solid #81c784;">
+        
+        <h2 class="small-h2">No worries, bestie. 🥹<br>Take care and see you around.</h2>
+        
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUybXdqYzgxbWQ0ZXRpMnVseGN5emRycm9md2ZqOXBraGwydWZvaXZqcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ml0VpF0fwdpXcroapy/giphy.gif" style="width: 140px; border-radius: 10px; margin-top: 15px;">
+        
+        <button onclick="goBack()" style="background:none; border:none; color:#2e7d32; margin-top:20px; font-weight:bold; cursor:pointer;">Back</button>
+    </div>
+
+    <script>
+        const icons = ['🌸', '🌼', '🍃', '🌿', '🌷', '🍀', '🌹', '🍂'];
+        const layer = document.getElementById('decor-layer');
+        for (let i = 0; i < 25; i++) {
+            const span = document.createElement('span');
+            span.className = 'decor';
+            span.innerText = icons[Math.floor(Math.random() * icons.length)];
+            span.style.left = Math.random() * 100 + 'vw';
+            span.style.top = Math.random() * 100 + 'vh';
+            span.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            span.style.animationDelay = (Math.random() * -20) + 's';
+            layer.appendChild(span);
+        }
+
+        function hideAll() { document.querySelectorAll('.screen').forEach(s => s.style.display = 'none'); }
+        function showGuiltScreen() { hideAll(); document.body.style.background = 'var(--bg-pond)'; document.getElementById('guilt-screen').style.display = 'flex'; }
+        function openLetter() { hideAll(); document.body.style.background = 'var(--bg-letter)'; document.getElementById('main-card').style.display = 'flex'; }
+        function showFinalSalamat() { hideAll(); document.getElementById('final-salamat').style.display = 'flex'; }
+        function goBack() { location.reload(); }
+
+        const noBtn = document.getElementById('noBtn');
+        let count = 0;
+        const texts = ["No", "Sure?", "Sure na?", "Legit?", "Final Answer?", "Owkie!"];
+        const leafColors = ['#81c784', '#ffa726', '#ffd54f', '#ba68c8', '#ef5350', '#4fc3f7'];
+
+        noBtn.onclick = () => {
+            if (count < texts.length - 1) {
+                count++;
+                noBtn.innerText = texts[count];
+                noBtn.style.backgroundColor = leafColors[count % leafColors.length];
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 100);
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+            } else {
+                hideAll();
+                document.getElementById('no-screen').style.display = 'flex';
+            }
+        };
+
+        document.getElementById('yesBtn').onclick = () => { hideAll(); document.getElementById('yes-screen').style.display = 'flex'; };
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); noBtn.click(); });
+    </script>
+</body>
+</html>
+
